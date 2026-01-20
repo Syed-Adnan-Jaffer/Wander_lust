@@ -24,7 +24,7 @@
 </style>
 
 
-<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
+<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top" id="main-navbar">
   <div class="container-fluid">
     <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass"></i></a>
     <button class="navbar-toggler" type="button" 
@@ -55,7 +55,7 @@
       <!-- SignUP -->
        <div class="navbar-nav ms-auto">
         <a class="nav-link" href="listings/new">Airbnb your home</a>
-        <% if(!currUser) {%>
+        <% if(!currUser) { %>
           <a class="nav-link "  href="/signup"><b>Sign up</b></a>
           <a class="nav-link" href="/login"><b>Log in</b></a>
         <% } %>
@@ -66,3 +66,4 @@
     </div>
   </div>
 </nav>
+
