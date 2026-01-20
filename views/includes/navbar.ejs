@@ -40,11 +40,12 @@
       </div>
       <!-- search option  -->
       <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search">
+        <form class="d-flex" role="search" action="/listings" method="GET">
           <input 
             class="form-control me-2 search-input" 
             type="search" 
             placeholder="Search destinations"
+            name="search"
           />
           <button class="btn search-btn" type="submit">
             <i class="fa-solid fa-magnifying-glass"></i>Search
@@ -66,4 +67,13 @@
     </div>
   </div>
 </nav>
+
+<script>
+  let toggler = document.querySelector(".navbar-toggler");
+  let navBar = document.getElementById("main-navbar");
+
+  toggler.addEventListener("click", () => {
+    navBar.classList.toggle("navbar-expanded");
+  });
+</script>
 
