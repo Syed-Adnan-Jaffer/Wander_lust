@@ -1,96 +1,178 @@
 <% layout("/layouts/boilerplate") %> 
 
     <style>
-       #filters{
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-       }
-       .filter{
-        text-align: center;
-        margin-right: 2rem;
-        margin-top: 2rem;
-        opacity: 0.7;
-       }
-       .filter:hover{
-        opacity: 1;
-        cursor: pointer;
+       #filters {
+           display: flex;
+           flex-wrap: nowrap;
+           align-items: center;
+           overflow-x: auto;
+           overflow-y: hidden;
+           scroll-behavior: smooth;
+           -webkit-overflow-scrolling: touch;
+           padding-bottom: 1rem;
+           /* Add mask for fading effect */
+           -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+           mask-image: linear-gradient(to right, black 90%, transparent 100%);
        }
 
-       .filter p{
-            font-size: 0.8rem;
+       #filters::-webkit-scrollbar {
+           display: none;
        }
 
-       .taxInfo{
-        display: none;
+       #filters {
+           -ms-overflow-style: none;  /* IE and Edge */
+           scrollbar-width: none;  /* Firefox */
        }
 
-       .tax-toggle{
-        border: 1px solid black;
-        border-radius: 1rem;
-        height: 3.25rem;
-        padding: 1rem;
-        margin-left: 2rem;
-        display: flex;
-        align-items: center;
+       .filter {
+           text-align: center;
+           margin-right: 2rem;
+           margin-top: 1rem; /* Reduced top margin for better alignment */
+           opacity: 0.7;
+           flex-shrink: 0; /* Prevent shrinking */
        }
+
+       .filter:hover {
+           opacity: 1;
+           cursor: pointer;
+       }
+
+       .filter p {
+           font-size: 0.8rem;
+       }
+
+       .taxInfo {
+           display: none;
+       }
+
+       .tax-toggle {
+           border: 1px solid black;
+           border-radius: 1rem;
+           height: 3.25rem;
+           padding: 1rem;
+           padding-bottom: 0.7rem;
+           margin-left: auto; /* Push to right */
+           display: flex;
+           align-items: center;
+           min-width: 250px; /* Prevent squashing */
+       }
+
+       .filter-container {
+           display: flex;
+           align-items: center;
+           position: sticky;
+           top: 0;
+           z-index: 100;
+           background-color: white; /* Ensure it covers content behind on scroll if sticky */
+           padding: 1rem 0;
+       }
+
+        #slideButton {
+            font-size: 1.5rem;
+            padding-right: 4rem;
+            padding-bottom: 0.8rem;
+            opacity: 50%;
+            cursor: pointer;
+        }
+
+       #slideButton:hover {
+           opacity: 1;
+       }
+
+       @media (max-width: 768px) {
+            .filter-container {
+                flex-wrap: wrap; /* Allow toggle to wrap on mobile */
+                align-items: center;
+            }
+            #filters {
+                flex: 1; /* Take remaining space */
+                min-width: 0; /* Allow shrinking */
+            }
+            #slideButton {
+                display: block;
+                flex: 0 0 auto; /* Don't grow or shrink */
+                margin-left: 0.8rem;
+                margin-right: 0;
+            }
+            .tax-toggle {
+                margin-left: 0;
+                margin-top: 1rem;
+                width: 100%;
+                justify-content: center; /* Center toggle on mobile */
+            }
+       }
+
     </style>
 
-    <div id="filters">
-        <div class="filter">
-            <div><i class="fa-solid fa-fire"></i></div>
-            <p>Trending</p>
-        </div>
+    <div class="filter-container">
+        <div id="filters">
+            <div class="filter">
+                <div><i class="fa-solid fa-fire"></i></div>
+                <p>Trending</p>
+            </div>
+    
+            <div class="filter">
+                <div><i class="fa-solid fa-bed"></i></div>
+                <p>Rooms</p>
+            </div>
+    
+            <div class="filter">
+                <div><i class="fa-solid fa-mountain-city"></i></div>
+                <p>Iconic Cities</p>
+            </div>
+    
+            <div class="filter">
+                <div><i class="fa-solid fa-mountain"></i></div>
+                <p>Mountains</p>
+            </div>
+    
+            <div class="filter">
+                <div><i class="fa-solid fa-place-of-worship"></i></div>
+                <p>Castles</p>
+            </div>
+    
+            <div class="filter">
+                <div><i class="fa-solid fa-person-swimming"></i></div>
+                <p>Amazing Pools</p>
+            </div>
+    
+            <div class="filter">
+                <div><i class="fa-solid fa-campground"></i></div>
+                <p>Camping</p>
+            </div>
+    
+            <div class="filter">
+                <div><i class="fa-solid fa-cow"></i></div>
+                <p>Farms</p>
+            </div>
+    
+            <div class="filter">
+                <div><i class="fa-regular fa-snowflake"></i></div>
+                <p>Arctic</p>
+            </div>
+    
+            <div class="filter">
+                <div><i class="fa-solid fa-landmark-dome"></i></div>
+                <p>Domes</p>
+            </div>
+    
+            <div class="filter">
+                <div><i class="fa-solid fa-ship"></i></div>
+                <p>Boats</p>
+            </div>
 
-        <div class="filter">
-            <div><i class="fa-solid fa-bed"></i></div>
-            <p>Rooms</p>
-        </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-umbrella-beach"></i></div>
+                <p>Beaches</p>
+            </div>
 
-        <div class="filter">
-            <div><i class="fa-solid fa-mountain-city"></i></div>
-            <p>Iconic Cities</p>
-        </div>
+             <div class="filter">
+                <div><i class="fa-solid fa-clapperboard"></i></div>
+                <p>Castles</p>
+            </div>
 
-        <div class="filter">
-            <div><i class="fa-solid fa-mountain"></i></div>
-            <p>Mountains</p>
         </div>
-
-        <div class="filter">
-            <div><i class="fa-solid fa-place-of-worship"></i></div>
-            <p>Castles</p>
-        </div>
-
-        <div class="filter">
-            <div><i class="fa-solid fa-person-swimming"></i></div>
-            <p>Amazing Pools</p>
-        </div>
-
-        <div class="filter">
-            <div><i class="fa-solid fa-campground"></i></div>
-            <p>Camping</p>
-        </div>
-
-        <div class="filter">
-            <div><i class="fa-solid fa-cow"></i></div>
-            <p>Farms</p>
-        </div>
-
-        <div class="filter">
-            <div><i class="fa-regular fa-snowflake"></i></div>
-            <p>Arctic</p>
-        </div>
-
-        <div class="filter">
-            <div><i class="fa-solid fa-landmark-dome"></i></div>
-            <p>Domes</p>
-        </div>
-
-        <div class="filter">
-            <div><i class="fa-solid fa-ship"></i></div>
-            <p>Boats</p>
-        </div>
+        <i class="fa-solid fa-arrow-right" id="slideButton"></i>
 
         <div class="tax-toggle">
             <div class="form-check-reverse form-switch">
@@ -139,5 +221,15 @@
             }
         } 
     })
+
+    const slideButton = document.getElementById("slideButton");
+    const filtersContainer = document.getElementById("filters");
+
+    slideButton.addEventListener("click", () => {
+        filtersContainer.scrollBy({
+            left: 200, // Scroll amount
+            behavior: "smooth"
+        });
+    });
 </script>
 
