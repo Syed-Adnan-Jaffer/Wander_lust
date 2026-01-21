@@ -24,15 +24,15 @@
 
     <!-- hiding or displaying the edit and delete buttons for only logged-in user and hiding from other users -->
     <% if(currUser && listing.owner._id.equals(currUser._id)) {%>  <!--REVIEW AUTORIZATION -->
-    <div class="btns">
-        <a href="/listings/<%= listing._id %>/edit" 
-            class="btn btn-dark col-1 offset-3 edit-Btn"
-            >Edit</a> 
-            
-        <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
-            <button class="btn btn-dark  offset-5">Delete</button>
-        </form>
-    </div>
+        <div class="btns">
+            <a href="/listings/<%= listing._id %>/edit" 
+                class="btn btn-dark col-1 offset-3 edit-Btn"
+                >Edit</a> 
+                
+            <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+                <button class="btn btn-dark  offset-5">Delete</button>
+            </form>
+        </div>
     <% } %>
     
     <div class="col-8 offset-3 mt-3 mb-3">
