@@ -1,14 +1,60 @@
 <% layout("/layouts/boilerplate") %>
+
+    <style>
+    @media (min-width : 320px) and (max-width:426px){
+        body{
+            width: 75vh;
+        }
+        #map{
+            width: 425px;
+            height: 400px;
+        } 
+    }
+
+    @media (min-width:426px) and (max-width:767px){
+        body{
+            width: 82vh;
+        }
+        #map{
+            width: 460px;
+            height: 400px;
+        }
+    }
+    @media (min-width:768px) and (max-width:900px){
+        body{
+            width: 129vh;
+        }
+        .listing-card{
+            width: 70vh;
+            margin-left:15vh;
+        }
+        #map{
+            width: 500px;
+            height: 400px;
+            margin-right: 5rem;
+        }
+        .row{
+            margin-left: 3.5rem;
+        }
+        @media(min-width:1024px){
+            #map{
+                width: 400px;
+                height: 400px;
+            }
+        }
+    }
+</style>
+
     <script>
         const mapToken = "<%= process.env.MAP_TOKEN %>";
         const listing = <%- JSON.stringify(listing) %>;
     </script>
     <div class="row"> 
-        <div class="col-8 offset-3 mt-3">
+        <div class="col-12 offset-0 col-md-8 offset-md-3 mt-3">
             <h3><%= listing.title %> </h3>
         </div>
-        <div class="card col-6 offset-3 show-card listing-card">
-            <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing-img">
+        <div class="card col-12 offset-0 col-md-6 offset-md-3 show-card listing-card">
+            <img src="<%= listing.image.url %>" class="card-img-top show-img IMAGE-size" alt="listing-img">
             <div class="card-body">
                 <p class="card-text">  <i>Owned by <%= listing.owner.username  %></i> <br> </p>
         
@@ -24,18 +70,20 @@
 
     <!-- hiding or displaying the edit and delete buttons for only logged-in user and hiding from other users -->
     <% if(currUser && listing.owner._id.equals(currUser._id)) {%>  <!--REVIEW AUTORIZATION -->
-        <div class="btns">
-            <a href="/listings/<%= listing._id %>/edit" 
-                class="btn btn-dark col-1 offset-3 edit-Btn"
-                >Edit</a> 
-                
-            <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
-                <button class="btn btn-dark  offset-5">Delete</button>
-            </form>
+        <div class="col-12 offset-0 col-md-8 offset-md-3 mt-3">
+            <div class="btns d-flex">
+                <a href="/listings/<%= listing._id %>/edit" 
+                    class="btn btn-dark edit-Btn me-3"
+                    >Edit</a> 
+                    
+                <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+                    <button class="btn btn-dark">Delete</button>
+                </form>
+            </div>
         </div>
     <% } %>
     
-    <div class="col-8 offset-3 mt-3 mb-3">
+    <div class="col-12 offset-0 col-md-8 offset-md-3 mt-3 mb-3">
         <% if(currUser){%>
             <hr>
         <h4>Leave a Review</h4>
@@ -91,7 +139,7 @@
         <div class="row"> 
             <p><b>All Reviews</b></p> 
             <% for(review of listing.reviews) {%>
-                <div class="card col-5 ms-3 mb-3">
+                <div class="card col-12 col-md-5 ms-3 mb-3">
                     <div class="card-body">
                     <h5 class="card-title">@<%=  review.author.username %></h5>
                     <p class="starability-result card-text" data-rating="<%= review.rating %>">
@@ -108,7 +156,7 @@
         <% } %>
     </div>
     <!-- display MAP IN LISTING WITH MAPBOX  -->
-    <div class="col-8 offset-3 mt-3 mb-3">
+    <div class="col-12 offset-0 col-md-8 offset-md-3 mt-3 mb-3">
         <h3>Where you'll be</h3>
         <div id="map"></div>
     </div>
