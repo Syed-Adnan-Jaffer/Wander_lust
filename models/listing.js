@@ -36,14 +36,15 @@ const listingSchema = new Schema({
             required: true
         },
     },
-    // category:{
-    //     type: String,
-    //     enum:["mountains" , "arctic" , "farms" , "deserts"]
-    // }
+    category:{
+        type: [String],
+        enum:["mountains" , "arctic" , "farms" , "deserts" , "beaches" , "movies" , "castles" , "iconic cities" , "amazing pools" , "camping" , "trending" , "rooms" , "domes" , "boats"],
+        default: ["trending"],
+    }
 });
- 
-//mongoose middleware --> For delition of review when we delete the listing 
-listingSchema.post("findOneandDelete" , async(listing)=>{
+
+//mongoose middleware --> For deletion of review when we delete the listing 
+listingSchema.post("findOneAndDelete", async (listing) => {
     if(listing){
         await Review.deleteMany({_id : {$in: listing.reviews} });
     }

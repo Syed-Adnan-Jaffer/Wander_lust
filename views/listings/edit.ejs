@@ -42,6 +42,19 @@
                         class="form-control"
                     >
                 </div>
+
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <select name="listing[category]" id="category" class="form-select" required>
+                        <% 
+                        const categories = ["mountains", "arctic", "farms", "deserts", "beaches", "movies", "castles", "iconic cities", "amazing pools", "camping", "trending", "rooms", "domes", "boats"];
+                        for(let category of categories) { 
+                        %>
+                        <option value="<%= category %>" <%= listing.category === category ? 'selected' : '' %>><%= category.charAt(0).toUpperCase() + category.slice(1) %></option>
+                        <% } %>
+                    </select>
+                    <div class="invalid-feedback">Please select a category</div>
+                </div>
                 
                 <div class="row">
                     <div class="mb-3 col-md-4">

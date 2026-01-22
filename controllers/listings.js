@@ -6,6 +6,7 @@ const geocodingClient = mbxGeocoding({accessToken: mapToken});
 //search option
 module.exports.index = async(req , res)=>{
     let search = req.query.search || "";
+    let category = req.query.category || "";  
     let allListings;
     if(search){
         allListings = await Listing.find({
@@ -19,7 +20,9 @@ module.exports.index = async(req , res)=>{
             req.flash("error", "No results found");
             return res.redirect("/listings");
         }
-    }else{
+    } else if(category){ // Finds listings where the category array includes the selected category
+        allListings = await Listing.find({ category: { $in: [category] } });
+    } else{ // ... returns all listings if no category
         allListings = await Listing.find({});
     }
     res.render("listings/index.ejs" , {allListings});
