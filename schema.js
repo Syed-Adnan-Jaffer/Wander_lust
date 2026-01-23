@@ -11,8 +11,8 @@ module.exports.listingSchema = Joi.object({
         image: Joi.object({
             url: Joi.string().allow("", null).optional(),
             filename: Joi.string().allow("", null).optional()
-}), //allowing image to b non required compulsorily
-        category: Joi.array().items(Joi.string().valid("mountains", "arctic", "farms", "deserts", "beaches", "movies", "castles", "iconic cities", "amazing pools", "camping", "trending", "rooms", "domes", "boats")).required()
+        }), //allowing image to b non required compulsorily
+        category: Joi.array().single().items(Joi.string().valid("mountains", "arctic", "farms", "deserts", "beaches", "movies", "castles", "iconic cities", "amazing pools", "camping", "trending", "rooms", "domes", "boats")).required()
     }).required()
 })
 

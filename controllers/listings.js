@@ -100,7 +100,17 @@ module.exports.updateListing = async(req , res)=>{
     //         throw new ExpressError(400,"Send valid data for Listing")  //but it doesnt apply for individual things in listing like if we didn't add description
     // }    USING validateListing MIDDLEWARE                               //or location it simply adds to DB without any error so to overcome that we have to validate every                    
                                                                             //every single element ; there are 2 ways 1 is validating by using if conditon on evry single element one by one 
-    let { id } = req.params;                                                    //which is not convectional so we use API called JOI
+    let { id } = req.params;
+    let response = await geocodingClient.forwardGeocode({
+        query: req.body.listing.location,
+        limit: 1,
+    })
+    .send();
+
+    if(response.body.features.length > 0){
+        req.body.listing.geometry = response.body.features[0].geometry;
+    }
+
     let listing = await Listing.findByIdAndUpdate(id , {...req.body.listing}); //JS object 
     
     if(typeof req.file != "undefined") {
