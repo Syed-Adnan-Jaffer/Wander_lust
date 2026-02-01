@@ -55,8 +55,10 @@
         </div>
         <div class="card col-12 offset-0 col-md-6 offset-md-3 show-card listing-card">
             <img src="<%= listing.image.url %>" class="card-img-top show-img IMAGE-size" alt="listing-img">
+            <br> 
+            <p><i>Owned by <%= listing.owner.username  %></i> </p>
             <div class="card-body">
-                <p class="card-text"> <br> </p>
+                <p class="card-text">  </p>
         
                     <p class="card-text">  <%= listing.description %>  </p>
                     <p class="card-text">  &#8377; <%= listing.price ? listing.price.toLocaleString("en-IN") : "Price not set" %>  </p>
