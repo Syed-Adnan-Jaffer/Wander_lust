@@ -45,9 +45,12 @@
     }
 </style>
 
+    <script id="listing-data" type="application/json">
+        <%- JSON.stringify(listing) %>
+    </script>
     <script>
         const mapToken = "<%= process.env.MAP_TOKEN %>";
-        const listing = <%- JSON.stringify(listing) %>;
+        const listing = JSON.parse(document.getElementById('listing-data').textContent);
     </script>
     <div class="row"> 
         <div class="col-12 offset-0 col-md-8 offset-md-3 mt-3">
